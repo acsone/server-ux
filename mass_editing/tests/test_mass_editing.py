@@ -16,7 +16,7 @@ class TestMassEditing(common.SavepointCase):
 
     def setUp(self):
         super().setUp()
-
+        self.env = self.env(context=dict(self.env.context, tracking_disable=True))
         self.MassEditingWizard = self.env["mass.editing.wizard"]
         self.ResPartnerTitle = self.env["res.partner.title"]
         self.ResLang = self.env["res.lang"]
