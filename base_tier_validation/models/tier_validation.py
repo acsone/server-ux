@@ -52,6 +52,19 @@ class TierValidation(models.AbstractModel):
     has_comment = fields.Boolean(compute="_compute_has_comment")
     next_review = fields.Char(compute="_compute_next_review")
 
+    tier_validation_before_write = fields.Boolean(
+        compute="_compute_tier_validation_before_write",
+    )
+
+    @api.depends_context("tier_validation_before_write")
+    def _compute_tier_validation_before_write(self):
+        """
+        This is a technical field in order to represent the validation
+        step.
+        """
+        before_write = self.env.context.get("tier_validation_before_write")
+        self.update({"tier_validation_before_write": before_write})
+
     def _compute_has_comment(self):
         for rec in self:
             has_comment = rec.review_ids.filtered(
@@ -245,12 +258,17 @@ class TierValidation(models.AbstractModel):
             context = self.env.context.copy()
             context.pop("active_test")
             new_self = self.with_context(context)
+        validated_records = new_self.browse()
+        validated_reviews = self.env["tier.review"].browse()
         for rec in new_self:
             if rec._check_state_conditions(vals):
                 if rec.need_validation:
                     # try to validate operation
                     reviews = rec.request_validation()
-                    rec._validate_tier(reviews)
+                    validated_reviews |= reviews
+                    rec._validate_tier(
+                        reviews.with_context(tier_validation_before_write=True)
+                    )
                     if not new_self._calc_reviews_validated(reviews):
                         pending_reviews = reviews.filtered(
                             lambda r: r.status == "pending"
@@ -280,7 +298,15 @@ class TierValidation(models.AbstractModel):
             new_self._state_from + [new_self._cancel_state]
         ):
             new_self.mapped("review_ids").unlink()
-        return super(TierValidation, new_self).write(vals)
+        res = super(TierValidation, new_self).write(vals)
+        validated_records._post_tier_validation(validated_reviews)
+        return res
+
+    def _post_tier_validation(self, reviews):
+        """
+        This is a hook to add some actions after the reviews
+        """
+        return True
 
     def _check_state_conditions(self, vals):
         self.ensure_one()
