@@ -5,7 +5,7 @@
 
 {
     "name": "Optional CSV import",
-    "version": "15.0.1.0.1",
+    "version": "16.0.1.0.0",
     "category": "Server tools",
     "summary": "Group-based permissions for importing CSV files",
     "license": "AGPL-3",
