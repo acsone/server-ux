@@ -620,18 +620,6 @@ class TierValidation(models.AbstractModel):
                 new_node = etree.fromstring(new_arch)
                 for new_element in new_node:
                     node.addprevious(new_element)
-                # _add_tier_validation_reviews process
-                new_node = self._add_tier_validation_reviews(node, params)
-                new_arch, new_models = View.postprocess_and_fields(new_node, self._name)
-                for model in new_models:
-                    if model in all_models:
-                        continue
-                    if model not in res["models"]:
-                        all_models[model] = new_models[model]
-                    else:
-                        all_models[model] = res["models"][model]
-                new_node = etree.fromstring(new_arch)
-                node.append(new_node)
             res["arch"] = etree.tostring(doc)
             res["models"] = frozendict(all_models)
         return res
