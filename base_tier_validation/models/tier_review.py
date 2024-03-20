@@ -42,8 +42,8 @@ class TierReview(models.Model):
         store=True,
     )
     sequence = fields.Integer(string="Tier")
-    todo_by = fields.Char(compute="_compute_todo_by", store=True)
-    done_by = fields.Many2one(comodel_name="res.users")
+    todo_by = fields.Char(compute="_compute_todo_by", store=True, string="Validator(s)")
+    done_by = fields.Many2one(comodel_name="res.users", string="Validated by")
     requested_by = fields.Many2one(comodel_name="res.users")
     reviewed_date = fields.Datetime(string="Validation Date")
     reviewed_formated_date = fields.Char(
