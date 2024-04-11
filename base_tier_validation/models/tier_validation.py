@@ -567,13 +567,6 @@ class TierValidation(models.AbstractModel):
         self.mapped("review_ids").unlink()
         return super().unlink()
 
-    def _add_tier_validation_buttons(self, node, params):
-        str_element = self.env["ir.qweb"]._render(
-            "base_tier_validation.tier_validation_buttons", params
-        )
-        new_node = etree.fromstring(str_element)
-        return new_node
-
     def _add_tier_validation_label(self, node, params):
         str_element = self.env["ir.qweb"]._render(
             "base_tier_validation.tier_validation_label", params
@@ -605,14 +598,6 @@ class TierValidation(models.AbstractModel):
                 "state_value": self._state_from,
             }
             all_models = res["models"].copy()
-            for node in doc.xpath(self._tier_validation_buttons_xpath):
-                # By default, after the last button of the header
-                # _add_tier_validation_buttons process
-                new_node = self._add_tier_validation_buttons(node, params)
-                new_arch, new_models = View.postprocess_and_fields(new_node, self._name)
-                new_node = etree.fromstring(new_arch)
-                for new_element in new_node:
-                    node.addnext(new_element)
             for node in doc.xpath("/form/sheet"):
                 # _add_tier_validation_label process
                 new_node = self._add_tier_validation_label(node, params)

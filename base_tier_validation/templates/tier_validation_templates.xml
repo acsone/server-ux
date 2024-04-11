@@ -1,21 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="tier_validation_buttons">
-        <div>
-            <button
-                name="request_validation"
-                string="Request Validation"
-                t-attf-attrs="{'invisible': ['|','|',('need_validation', '!=', True),('rejected','=',True),('#{state_field}', '#{state_operator}', #{state_value})]}"
-                type="object"
-            />
-            <button
-                name="restart_validation"
-                string="Restart Validation"
-                t-attf-attrs="{'invisible': ['|',('review_ids', '=', []),('#{state_field}', '#{state_operator}', #{state_value})]}"
-                type="object"
-            />
-        </div>
-    </template>
     <template id="tier_validation_label">
         <div>
         <field name="need_validation" invisible="1" />
