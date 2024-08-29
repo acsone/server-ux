@@ -45,6 +45,7 @@
                             t-att-data-model_name="reviewGroupView.reviewGroup.irModel.name"
                             t-att-data-active_field="reviewGroupView.reviewGroup.irModel.active_field"
                             t-att-data-domain="reviewGroupView.reviewGroup.domain"
+                            t-att-data-views="reviewGroupView.reviewGroup.views"
                             data-filter='my'
                             t-att-data-activity-group-view-local-id="reviewGroupView.localId"
                             t-on-click="reviewGroupView.onClickFilterButton"
@@ -95,3 +96,4 @@
         </div>
     </t>
 </templates>
+
