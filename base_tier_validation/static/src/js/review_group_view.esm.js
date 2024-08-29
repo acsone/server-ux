@@ -14,9 +14,10 @@ registerModel({
             // Fetch the data from the button otherwise fetch the ones from the parent (.o_ActivityMenuView_activityGroup).
             const data = _.extend({}, $(ev.currentTarget).data(), $(ev.target).data());
             const context = {};
-            var domain = [["can_review", "=", true]];
+            var domain = data.domain ? data.domain : [["can_review", "=", true]];
+            var views = data.views ? data.views : this.reviewGroup.irModel.availableWebViews;
             console.log(data);
-            if (data.active_field) {
+            if (!data.domain && data.active_field) {
                 domain.push(["active", "in", [true, false]]);
             }
 
@@ -28,7 +29,7 @@ registerModel({
                     search_view_id: [false],
                     type: "ir.actions.act_window",
                     domain: domain,
-                    views: this.reviewGroup.irModel.availableWebViews.map(
+                    views: views.map(
                         (viewName) => [false, viewName]
                     ),
                 },
@@ -49,3 +50,4 @@ registerModel({
         }),
     },
 });
+
