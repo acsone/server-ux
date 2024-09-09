@@ -10,6 +10,7 @@ registerModel({
             return {
                 domain: data.domain,
                 views: data.views,
+                context: data.context,
                 irModel: {
                     iconUrl: data.icon,
                     id: data.id,
@@ -36,6 +37,7 @@ registerModel({
         }),
         domain: attr(),
         views: attr(),
+        context: attr(),
         irModel: one("ir.model.review", {
             identifying: true,
             inverse: "reviewGroup",
@@ -52,4 +54,5 @@ registerModel({
         },
     ],
 });
+
 
