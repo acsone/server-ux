@@ -263,7 +263,7 @@ class TierValidation(models.AbstractModel):
                             )
                             % "\n - ".join(pending_reviews)
                         )
-                if rec.review_ids and not rec.validated:
+                if rec.review_ids and not (rec.validated or rec.rejected):
                     raise ValidationError(
                         _(
                             "A validation process is still open for at least "
