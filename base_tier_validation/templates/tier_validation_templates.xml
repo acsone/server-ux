@@ -44,7 +44,7 @@
                     />
                 <button
                         name="reject_tier"
-                        string="Reject"
+                        string="Refuse"
                         t-attf-attrs="{'invisible': [('can_review', '=', False)]}"
                         type="object"
                         class="btn-icon btn-danger"

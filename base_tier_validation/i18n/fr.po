@@ -6,6 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-29 06:49+0000\n"
 "PO-Revision-Date: 2021-05-14 19:47+0000\n"
 "Last-Translator: Yves Le Doeuff <yld@alliasys.fr>\n"
 "Language-Team: none\n"
@@ -431,8 +432,8 @@ msgstr ""
 
 #. module: base_tier_validation
 #: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_validation_label
-msgid "Reject"
-msgstr "Rejet"
+msgid "Refuse"
+msgstr "Refuser"
 
 #. module: base_tier_validation
 #: model:ir.model.fields,field_description:base_tier_validation.field_tier_validation__rejected
@@ -529,10 +530,16 @@ msgid "Reviews"
 msgstr "Vérifications"
 
 #. module: base_tier_validation
+#: model:ir.actions.server,name:base_tier_validation.ir_cron_auto_tier_validation_ir_actions_server
+#: model:ir.cron,cron_name:base_tier_validation.ir_cron_auto_tier_validation
+#: model:ir.cron,name:base_tier_validation.ir_cron_auto_tier_validation
+msgid "Send Tier Review Reminder"
+msgstr ""
+
+#. module: base_tier_validation
 #. openerp-web
 #: code:addons/base_tier_validation/static/src/xml/tier_review_template.xml:0
 #: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__sequence
-#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__sequence
 #, python-format
 msgid "Sequence"
 msgstr ""
@@ -581,6 +588,11 @@ msgid ""
 "This action needs to be validated for at least one record. Reviews pending:\n"
 " - %s \n"
 "Please request a validation."
+msgstr ""
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__sequence
+msgid "Tier"
 msgstr ""
 
 #. module: base_tier_validation
@@ -636,6 +648,12 @@ msgstr ""
 #. module: base_tier_validation
 #: model:mail.message.subtype,name:base_tier_validation.mt_tier_validation_rejected
 msgid "Tier Validation Rejected Notification"
+msgstr ""
+
+#. module: base_tier_validation
+#: model:mail.activity.type,name:base_tier_validation.mail_act_tier_validation_reminder
+#: model:mail.message.subtype,name:base_tier_validation.mt_tier_validation_reminder
+msgid "Tier Validation Reminder"
 msgstr ""
 
 #. module: base_tier_validation
@@ -723,6 +741,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_definition_view_form
 msgid "e.g. Tier Validation for..."
 msgstr "ie Validation par un tiers pour..."
-
-#~ msgid "Any user in a specific group."
-#~ msgstr "Tout utilisateur d'un groupe spécifique."
