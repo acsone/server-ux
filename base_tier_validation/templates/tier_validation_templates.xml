@@ -8,12 +8,6 @@
                 t-attf-attrs="{'invisible': ['|','|',('need_validation', '!=', True),('rejected','=',True),('#{state_field}', 'not in', [#{state_from}])]}"
                 type="object"
             />
-            <button
-                name="restart_validation"
-                string="Restart Validation"
-                t-attf-attrs="{'invisible': ['|',('review_ids', '=', []),('#{state_field}', 'not in', [#{state_from}])]}"
-                type="object"
-            />
         </div>
     </template>
     <template id="tier_validation_label">
